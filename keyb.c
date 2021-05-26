@@ -85,11 +85,9 @@ char get_key() {
     color.bgcolor = 8;
     color.fgcolor = 15;
 
-    char ret = inp_buff[0];
-
-    while (inp_buff_idx <= 0) {
-        ret = inp_buff[0];
-    }  
+    if (inp_buff_idx == 0) {
+        __asm volatile("hlt");
+    } 
 
     // shift the values of inp_buff by one to the left
     for (unsigned int i = 1; i < inp_buff_idx; i++) {
