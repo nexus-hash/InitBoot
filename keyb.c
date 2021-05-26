@@ -87,8 +87,8 @@ char get_key() {
 
     if (inp_buff_idx == 0) {
         __asm volatile("hlt");
-    } 
-
+    }  
+    char ret = inp_buff[0];
     // shift the values of inp_buff by one to the left
     for (unsigned int i = 1; i < inp_buff_idx; i++) {
         inp_buff[i - 1] = inp_buff[i];
