@@ -53,11 +53,11 @@ static void scroll()
 }
 
 // Writes a single character out to the screen.
-void monitor_put(char c,u8int bgcolor,u8int fgcolor,int x,int y)
+void monitor_put(char c, color_t color)
 {
     // The background colour is black (0), the foreground is white (15).
-    u8int backColour = bgcolor;
-    u8int foreColour = fgcolor;
+    u8int backColour = color.bgcolor;
+    u8int foreColour = color.fgcolor;
 
     // The attribute byte is made up of two nibbles - the lower being the 
     // foreground colour, and the upper the background colour.
@@ -135,20 +135,20 @@ void monitor_clear()
 }
 
 // Outputs a null-terminated ASCII string to the monitor.
-void monitor_write(char *c,u8int bgcolor,u8int fgcolor,int x,int y)
+void monitor_write(char *c, color_t color)
 {
     int i = 0;
     while (c[i])
     {
-        monitor_put(c[i++],bgcolor,fgcolor,x, y);
+        monitor_put(c[i++], color);
     }
 }
 
-void monitor_write_hex(u32int n,u8int bgcolor,u8int fgcolor,int x,int y)
+void monitor_write_hex(u32int n, color_t color)
 {
     s32int tmp;
 
-    monitor_write("0x",bgcolor,fgcolor, x, y);
+    monitor_write("0x", color);
 
     char noZeroes = 1;
 
@@ -164,33 +164,33 @@ void monitor_write_hex(u32int n,u8int bgcolor,u8int fgcolor,int x,int y)
         if (tmp >= 0xA)
         {
             noZeroes = 0;
-            monitor_put (tmp-0xA+'a' ,bgcolor, fgcolor,x,y);
+            monitor_put (tmp-0xA+'a', color);
         }
         else
         {
             noZeroes = 0;
-            monitor_put( tmp+'0', bgcolor,fgcolor, x, y );
+            monitor_put( tmp+'0', color);
         }
     }
   
     tmp = n & 0xF;
     if (tmp >= 0xA)
     {
-        monitor_put (tmp-0xA+'a',bgcolor,fgcolor,x, y);
+        monitor_put (tmp-0xA+'a', color);
     }
     else
     {
-        monitor_put (tmp+'0',bgcolor,fgcolor,x, y);
+        monitor_put (tmp+'0', color);
     }
-
+ 
 }
 
-void monitor_write_dec(u32int n,u8int bgcolor,u8int fgcolor,int x,int y)
+void monitor_write_dec(u32int n, color_t color)
 {
 
     if (n == 0)
     {
-        monitor_put('0',bgcolor,fgcolor,x, y);
+        monitor_put('0', color);
         return;
     }
 
@@ -212,6 +212,5 @@ void monitor_write_dec(u32int n,u8int bgcolor,u8int fgcolor,int x,int y)
     {
         c2[i--] = c[j++];
     }
-    monitor_write(c2, bgcolor,fgcolor,x, y);
-
+    monitor_write(c2, color);
 }
