@@ -7,10 +7,8 @@
 
 #define MAX_BUF_LEN 1024
 
-char inp_buff[MAX_BUF_LEN];
-unsigned int inp_buff_idx = 0;
-
 void kb_init(void);
 void keyboard_handler(void);
 
 char get_key();
+#endif

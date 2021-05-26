@@ -1,5 +1,6 @@
 #include "monitor.h"
 #include "idt_int.h"
+#include "keyb.h"
 
 void kmain(void)
 {
@@ -15,8 +16,6 @@ void kmain(void)
 
     // Write out a sample string
     monitor_write("Welcome to Init OS!\n", color);
-    pos.x=0;
-    pos.y=2;
     monitor_write("\nType in 'help' for a list of commands, and 'about'\nfor version info.\n\n", color);
 
     char c = get_key();
