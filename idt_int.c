@@ -1,5 +1,8 @@
 #include "idt_int.h"
 
+struct idt_entry idt_table[IDT_SIZE];
+struct idt_pointer idt_ptr;
+
 void load_idt_entry(int isr_number, unsigned long base, short int selector, unsigned char flags)
 {
     idt_table[isr_number].offset_lowerbits = base & 0xFFFF;

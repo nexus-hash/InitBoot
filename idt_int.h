@@ -24,8 +24,7 @@ struct idt_pointer
     unsigned int base;
 } __attribute__((packed));
 
-struct idt_entry idt_table[IDT_SIZE];
-struct idt_pointer idt_ptr;
+
 
 void load_idt_entry(int isr_number, unsigned long base, short int selector, unsigned char flags);
 static void initialize_idt_pointer();
