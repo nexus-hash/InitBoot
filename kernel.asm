@@ -1,6 +1,6 @@
 bits 32
 section .text
-;grub bootloader header
+; multiboot header
         align 4
         dd 0x1BADB002            ;magic
         dd 0x00                  ;flags
