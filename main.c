@@ -9,21 +9,17 @@ void kmain(void)
     load_idt_entry(0x21, (unsigned long) keyboard_handler_int, 0x08, 0x8e);
     kb_init();
 
-    color_t color;
-    color.bgcolor = 6;
-    color.fgcolor = 3;
+    monitor_set_theme_name(PINK_YELLOW);
 
-    monitor_clear();
-
+    monitor_clear_theme();
     // Write out a sample string
-    monitor_write("Welcome to Init Boot\n", color);
-    monitor_write("\nSelect OS to boot\n\n", color);
-    monitor_write("\nInit OS\n", color);
-    monitor_write("\nAlpenite OS\n\n\n\n", color);
-    monitor_write("\nCustomize", color);
+    monitor_write_theme("\n   Welcome to Init Boot\n", 0);
+    monitor_write_theme("\n   Select OS to boot\n\n", 0);
+    monitor_write_theme("\n   Init OS\n", 1);
+    monitor_write_theme("\n   Alpenite OS\n\n\n\n", 0);
+    monitor_write_theme("\n   Customize", 0);
 
     char c = get_key();
-    monitor_put(c, color);
 
     while(1) __asm__("hlt\n\t");
 }
