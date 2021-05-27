@@ -1,6 +1,7 @@
 #include "monitor.h"
 #include "idt_int.h"
 #include "keyb.h"
+#include "theme.h"
 
 void kmain(void)
 {
@@ -15,10 +16,11 @@ void kmain(void)
     monitor_clear();
 
     // Write out a sample string
-    monitor_write("Welcome to Init Boot!\n", color);
-    monitor_write("\nSelect OS to boot'\n\n", color);
-    monitor_write("\nInit OS'\n\n", color);
-    monitor_write("\nAlpenite OS'\n\n", color);
+    monitor_write("Welcome to Init Boot\n", color);
+    monitor_write("\nSelect OS to boot\n\n", color);
+    monitor_write("\nInit OS\n", color);
+    monitor_write("\nAlpenite OS\n\n\n\n", color);
+    monitor_write("\nCustomize", color);
 
     char c = get_key();
     monitor_put(c, color);

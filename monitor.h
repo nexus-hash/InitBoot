@@ -14,7 +14,7 @@ void monitor_put(char c, color_t color);
 
 // Clear the screen
 void monitor_clear();
-void monitor_clear_bg(colors_t color);
+void monitor_clear_bg(color_t color);
 
 // Write a null-terminated ASCII
 // string to the screen

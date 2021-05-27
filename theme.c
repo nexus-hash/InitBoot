@@ -1,7 +1,30 @@
 #include "theme.h"
 #include "monitor.h"
 
-void monitor_put_wtheme(char c, theme_t theme, int selected = 0) {
+#define MAX_THEMES 3
+
+theme_t avail_themes[] = {
+    {
+        {13, 14},
+        {12, 14}
+    },
+    {
+        {2, 14},
+        {3, 14}
+    },
+    {
+        {13, 14},
+        {5, 14}
+    },
+};
+
+theme_t current_theme = {
+        {13, 14},
+        {12, 14}
+    };
+enum themes current_theme_idx = 0;
+
+void monitor_put_wtheme(char c, theme_t theme, int selected) {
     if (selected) {
         monitor_put(c, theme.selected_text_color);
     }
@@ -16,7 +39,7 @@ void monitor_clear_wtheme(theme_t theme) {
 
 // Write a null-terminated ASCII
 // string to the screen
-void monitor_write_wtheme(char *c, theme_t theme, int selected = 0) {
+void monitor_write_wtheme(char *c, theme_t theme, int selected) {
     if (selected) {
         monitor_write(c, theme.selected_text_color);
     }
@@ -25,7 +48,7 @@ void monitor_write_wtheme(char *c, theme_t theme, int selected = 0) {
     }
 }
 
-void monitor_write_dec_wtheme(u32int n, theme_t theme, int selected = 0) {
+void monitor_write_dec_wtheme(u32int n, theme_t theme, int selected) {
     if (selected) {
         monitor_write_dec(n, theme.selected_text_color);
     }
@@ -37,7 +60,7 @@ void monitor_write_dec_wtheme(u32int n, theme_t theme, int selected = 0) {
 /* For writing with the current theme: */
 
 // Write a single char to screen
-void monitor_put_theme(char c, int selected = 0) {
+void monitor_put_theme(char c, int selected) {
     monitor_put_wtheme(c, current_theme, selected);
 }
 
@@ -51,10 +74,10 @@ void monitor_set_theme_name(enum themes theme) {
     current_theme_idx = theme;
 }
 
-void monitor_write_theme(char *c, int selected = 0) {
+void monitor_write_theme(char *c, int selected) {
     monitor_write_wtheme(c, current_theme, selected);
 }
 
-void monitor_write_dec_theme(u32int n, int selected = 0) {
+void monitor_write_dec_theme(u32int n, int selected) {
     monitor_write_dec_wtheme(n, current_theme, selected);
 }
