@@ -3,7 +3,7 @@
 
 #include "monitor.h"
 
-enum themes {PINK_YELLOW, GREEN_YELLOW, DEEPPINK_YELLOW};
+enum themes {PINK_BLACK, GREEN_YELLOW, DEEPPINK_YELLOW};
 
 typedef struct theme{
     color_t normal_text_color;
