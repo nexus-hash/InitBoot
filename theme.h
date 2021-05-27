@@ -34,4 +34,6 @@ void monitor_set_theme_name(enum themes theme);
 void monitor_write_theme(char *c, int selected);
 void monitor_write_dec_theme(u32int n, int selected);
 
+void monitor_clear_theme();
+
 #endif

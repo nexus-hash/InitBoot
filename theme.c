@@ -5,8 +5,8 @@
 
 theme_t avail_themes[] = {
     {
-        {13, 14},
-        {12, 14}
+        {13, 0},
+        {12, 0}
     },
     {
         {2, 14},
@@ -19,8 +19,8 @@ theme_t avail_themes[] = {
 };
 
 theme_t current_theme = {
-        {13, 14},
-        {12, 14}
+        {13, 0},
+        {12, 0}
     };
 enum themes current_theme_idx = 0;
 
@@ -80,4 +80,8 @@ void monitor_write_theme(char *c, int selected) {
 
 void monitor_write_dec_theme(u32int n, int selected) {
     monitor_write_dec_wtheme(n, current_theme, selected);
+}
+
+void monitor_clear_theme(){
+    monitor_clear_wtheme(current_theme);
 }
