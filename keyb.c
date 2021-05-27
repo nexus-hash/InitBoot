@@ -1,5 +1,6 @@
 #include "keyb.h"
 #include "monitor.h"
+#include "theme.h"
 
 char inp_buff[MAX_BUF_LEN];
 unsigned int inp_buff_idx = 0;
@@ -61,34 +62,48 @@ void kb_init(void)
     memset(inp_buff, MAX_BUF_LEN, 0);
 }
 
+static int current_loc = 0;
+/* Video memory starts at 0xb8000. Make it a constant pointer to
+   characters as this can improve compiler optimization since it
+   is a hint that the value of the pointer won't change */
+static char *const vidptr = (char*)0xb8000;
+
 void keyboard_handler(void)
 {
     signed char keycode;
 
+    color_t color={9,10};
+    
     keycode = read_port(0x60);
     /* Only print characters on keydown event that have
      * a non-zero mapping */
     if(keycode >= 0 && keyboard_map[keycode]) {
+        
+        
         if (inp_buff_idx < MAX_BUF_LEN) {
+            
             inp_buff[inp_buff_idx] = keyboard_map[keycode];
             inp_buff_idx++;
         }
+        
     }
 
+    
     /* Send End of Interrupt (EOI) to master PIC */
     write_port(0x20, 0x20);
 }
 
 char get_key() {
-
-    color_t color;
-    color.bgcolor = 8;
-    color.fgcolor = 15;
-
-    if (inp_buff_idx == 0) {
-        __asm volatile("hlt");
+    color_t color={9,10};
+    while (inp_buff_idx == 0) {
+      __asm volatile("hlt");
     }  
     char ret = inp_buff[0];
+
+    vidptr[current_loc] = ret;
+        /* Attribute 0x07 is white on black characters */
+    current_loc++;
+       vidptr[current_loc++] = 0x07;
     // shift the values of inp_buff by one to the left
     for (unsigned int i = 1; i < inp_buff_idx; i++) {
         inp_buff[i - 1] = inp_buff[i];
