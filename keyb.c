@@ -94,7 +94,6 @@ void keyboard_handler(void)
 }
 
 char get_key() {
-    color_t color={9,10};
     while (inp_buff_idx == 0) {
       __asm volatile("hlt");
     }  

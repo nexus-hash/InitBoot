@@ -7,10 +7,10 @@ section .text
         dd - (0x1BADB002 + 0x00) ;checksum. m+f+c should be zero
 
 global start
-extern kmain
+extern mulboot
 
 start:
-    lgdt [gdtr]                 ; Load our own GDT, the GDTR of Grub may be invalid
+    lgdt [gdtr]                 ; Load our own GDT
 
     jmp CODE32_SEL:.setcs       ; Set CS to our 32-bit flat code selector
 .setcs:
@@ -22,7 +22,7 @@ start:
     mov ss, ax
     mov esp, stack_space        ; set stack pointer
 
-    call kmain
+    call mulboot
 
 ; If we get here just enter an infinite loop
 endloop:

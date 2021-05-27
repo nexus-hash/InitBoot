@@ -2,20 +2,10 @@
 #include "idt_int.h"
 #include "keyb.h"
 #include "theme.h"
+#include "apleniteos.h"
+#include "initos.h"
 
 #define MAX_MENU_ITEMS 3
-
-void os_0() {
-    monitor_set_theme_name(GREEN_YELLOW);
-    monitor_clear_theme();
-    monitor_write_theme("Welcome to Init OS!",0);
-}
-
-void os_1() {
-    monitor_set_theme_name(DEEPPINK_YELLOW);
-    monitor_clear_theme();
-    monitor_write_theme("Welcome to Aplenite OS!",0);
-}
 
 void customize_screen() {
 
@@ -63,7 +53,7 @@ void customize_screen() {
     }
 }
 
-void kmain(void)
+void mulboot(void)
 {
     idt_init();
     load_idt_entry(0x21, (unsigned long) keyboard_handler_int, 0x08, 0x8e);
