@@ -9,14 +9,16 @@ void kmain(void)
     kb_init();
 
     color_t color;
-    color.bgcolor = 13;
-    color.fgcolor = 15;
+    color.bgcolor = 6;
+    color.fgcolor = 3;
 
     monitor_clear();
 
     // Write out a sample string
-    monitor_write("Welcome to Init OS!\n", color);
-    monitor_write("\nType in 'help' for a list of commands, and 'about'\nfor version info.\n\n", color);
+    monitor_write("Welcome to Init Boot!\n", color);
+    monitor_write("\nSelect OS to boot'\n\n", color);
+    monitor_write("\nInit OS'\n\n", color);
+    monitor_write("\nAlpenite OS'\n\n", color);
 
     char c = get_key();
     monitor_put(c, color);
