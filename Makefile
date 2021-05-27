@@ -1,5 +1,5 @@
 all:
-	nasm -f elf32 -g -F dwarf kernel.asm -o kernel.o
+	nasm -f elf32 -g -F dwarf boot.asm -o boot.o
 	nasm -f elf32 -g -F dwarf lowlevel.asm -o lowlevel.o
 	i686-elf-gcc -g -m32  -c keyb.c -o keyb.o -ffreestanding -O3 -Wall -Wextra -pedantic
 	i686-elf-gcc -g -m32  -c common.c -o common.o -ffreestanding -O3 -Wall -Wextra -pedantic

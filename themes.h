@@ -12,7 +12,7 @@ typedef struct theme {
     color_t selected_text_color;
 } theme_t;
 
-theme_t avail_themes[] = [
+theme_t avail_themes[] = {
     {
         {13, 14},
         {12, 14}
@@ -25,4 +25,6 @@ theme_t avail_themes[] = [
         {13, 14},
         {5, 14}
     },
-];
+};
+
+#endif
