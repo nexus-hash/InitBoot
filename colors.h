@@ -6,7 +6,7 @@ typedef struct color
     u8int fgcolor;
 } color_t;
 
-typedef struct positions
+typedef struct position
 {
     int x;
     int y;

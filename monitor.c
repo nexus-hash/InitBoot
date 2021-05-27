@@ -134,6 +134,25 @@ void monitor_clear()
     move_cursor();
 }
 
+// Clears the screen, by copying lots of spaces to the framebuffer.
+void monitor_clear_bg(color_t color)
+{
+    // Make an attribute byte for the default colours
+    u8int attributeByte = (color.bgcolor /*black*/ << 4) | (color.fgcolor /*white*/ & 0x0F);
+    u16int blank = 0x20 /* space */ | (attributeByte << 8);
+
+    int i;
+    for (i = 0; i < 80*25; i++)
+    {
+        video_memory[i] = blank;
+    }
+
+    // Move the hardware cursor back to the start.
+    cursor_x = 0;
+    cursor_y = 0;
+    move_cursor();
+}
+
 // Outputs a null-terminated ASCII string to the monitor.
 void monitor_write(char *c, color_t color)
 {
